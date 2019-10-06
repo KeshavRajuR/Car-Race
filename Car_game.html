@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Car Racing Game</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/narmalize.min.css">
+        <style type="text/css">
+            /*Styling the game*/
+            body{
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                background-color: darkcyan;
+                font-family: 'Josefin Sans', sans-serif;
+                background-position: center;
+            }
+            #score-div{
+                position: absolute;
+                margin-top: 20%;
+                margin-left: 10%;
+                font-size: 25px;
+                background: white;
+                color: #454545;
+                padding: 15px;
+                -webkit-box-shadow: 4px 4px 4px 1px #808080; 
+                box-shadow:  4px 4px 4px 1px #808080;
+            }
+        </style>
+    </head>
+    <body>
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600" rel="stylesheet">
+        <script src="https://cdnjs.couldflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--Score board-->
+        <div id="score-div">
+            <span>Score: </span>
+            <span id="score">0</span>
+        </div>
+        <!--Roads-->
+        <div class="line" id="line-1"></div>
+        <div class="line" id="line-2"></div>
+        <div class="line" id="line-3"></div>
+        <!--Cars-->
+        <div class="car" id="car-1">
+            <div class="f-glass"></div>
+            <div class="f-light-l"></div>
+            <div class="f-light-r"></div>
+            <div class="f-tyre-1"></div>
+            <div class="f-tyre-r"></div>
+            <div class="b-tyre-1"></div>
+            <div class="b-tyre-r"></div>
+            <div class="b-glass"></div>
+        </div>
+        <div class="car" id="car-2">
+            <div class="f-glass"></div>
+            <div class="f-light-l"></div>
+            <div class="f-light-r"></div>
+            <div class="f-tyre-1"></div>
+            <div class="f-tyre-r"></div>
+            <div class="b-tyre-1"></div>
+            <div class="b-tyre-r"></div>
+            <div class="b-glass"></div>
+        </div>
+        <div class="car" id="car-3">
+            <div class="f-glass"></div>
+            <div class="f-light-l"></div>
+            <div class="f-light-r"></div>
+            <div class="f-tyre-1"></div>
+            <div class="f-tyre-r"></div>
+            <div class="b-tyre-1"></div>
+            <div class="b-tyre-r"></div>
+            <div class="b-glass"></div>
+        </div>
+        <div id="restart-div">
+            <button>Click to restart</button>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
