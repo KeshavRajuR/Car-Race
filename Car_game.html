@@ -22,7 +22,7 @@
             overflow: hidden;
         }
         /*Styling the Road Surface Markings*/
-        .line_1, .line_2, .line_3 {
+        .line_1, .line_2, .line_3, .line_4 {
             position: absolute;
             height: 200px;
             width: 4%;
@@ -30,14 +30,26 @@
             background-color: rgba(255, 255, 255, 0.5);
         }
         .line_1 {
-            top: 100px;
-        }
+            top: -150px;
+        }        
         .line_2 {
-            top: 400px;
+            top: 145px;
         }
         .line_3 {
-            top: 700px;
+            top: 440px;
         }
+        .line_4 {
+            top: 735px;
+        }
+        .line_5, .line_6{
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            background: red;
+        }
+        .line_6{
+            margin-left: 98%;
+        }        
         /*Styling the cars*/
         .car {
             position: absolute;
@@ -69,33 +81,64 @@
         }
         .f_light_l,
         .f_light_r,
+        .b_light_l,
+        .b_light_r,
         .rev_f_light_l,
-        .rev_f_light_r {
+        .rev_f_light_r,
+        .rev_b_light_l,
+        .rev_b_light_r {
             position: absolute;
             height: 10%;
             width: 20%;
-            background-color: #efefef;
         }
         .f_light_l {
             top: -6%;
             margin-left: 10%;
+            background-color: #efefef;
             border-radius: 5px 5px 0px 0px;
         }
         .f_light_r {
             top: -6%;
             margin-left: 70%;
+            background-color: #efefef;
             border-radius: 5px 5px 0px 0px;
         }
+        .b_light_l {
+            top: 96%;
+            margin-left: 10%;
+            background-color: red;
+            border-radius: 0px 0px 5px 5px;
+        }
+        .b_light_r {
+            top: 96%;
+            margin-left: 70%;
+            background-color: red;
+            border-radius: 0px 0px 5px 5px;
+        }         
         .rev_f_light_l {
             top: 96%;
             margin-left: 10%;
+            background-color: #efefef;
             border-radius: 0px 0px 5px 5px;
         }
         .rev_f_light_r {
             top: 96%;
             margin-left: 70%;
+            background-color: #efefef;
             border-radius: 0px 0px 5px 5px;
-        }        
+        }
+        .rev_b_light_l {
+            top: -6%;
+            margin-left: 10%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+        }
+        .rev_b_light_r {
+            top: -6%;
+            margin-left: 70%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+        }                
         .f_tyre_l,
         .f_tyre_r,
         .b_tyre_l,
@@ -152,6 +195,7 @@
             text-align: center;
             display: none;
         }
+        /*Text on the restart button*/
         #restart {
             border: none;
             padding: 25px;
@@ -188,12 +232,17 @@
         <div class="line_1"></div>
         <div class="line_2"></div>
         <div class="line_3"></div>
+        <div class="line_4"></div>
+        <div class="line_5"></div>
+        <div class="line_6"></div>       
         <!--div for the car user will control-->
         <div id="car" class="car">
             <div class="f_glass"></div>
             <div class="b_glass"></div>
             <div class="f_light_l"></div>
             <div class="f_light_r"></div>
+            <div class="b_light_l"></div>
+            <div class="b_light_r"></div>            
             <div class="f_tyre_l"></div>
             <div class="f_tyre_r"></div>
             <div class="b_tyre_l"></div>
@@ -205,6 +254,8 @@
             <div class="b_glass"></div>
             <div class="rev_f_light_l"></div>
             <div class="rev_f_light_r"></div>
+            <div class="rev_b_light_l"></div>
+            <div class="rev_b_light_r"></div>            
             <div class="f_tyre_l"></div>
             <div class="f_tyre_r"></div>
             <div class="b_tyre_l"></div>
@@ -215,6 +266,8 @@
             <div class="b_glass"></div>
             <div class="rev_f_light_l"></div>
             <div class="rev_f_light_r"></div>
+            <div class="rev_b_light_l"></div>
+            <div class="rev_b_light_r"></div>
             <div class="f_tyre_l"></div>
             <div class="f_tyre_r"></div>
             <div class="b_tyre_l"></div>
@@ -225,6 +278,8 @@
             <div class="b_glass"></div>
             <div class="rev_f_light_l"></div>
             <div class="rev_f_light_r"></div>
+            <div class="rev_b_light_l"></div>
+            <div class="rev_b_light_r"></div>
             <div class="f_tyre_l"></div>
             <div class="f_tyre_r"></div>
             <div class="b_tyre_l"></div>
@@ -249,9 +304,12 @@
                 car_1 = $('#car_1'),
                 car_2 = $('#car_2'),
                 car_3 = $('#car_3'),
-                line_1 = $('#line_1'),
-                line_2 = $('#line_2'),
-                line_3 = $('#line_3'),
+                line_1 = $('.line_1'),
+                line_2 = $('.line_2'),
+                line_3 = $('.line_3'),
+                line_4 = $('.line_4'),
+                line_5 = $('.line_5'),
+                line_6 = $('.line_6'),                             
                 restart_div = $('#restart_div'),
                 restart_btn = $('#restart'),
                 score = $('#score');
@@ -260,12 +318,14 @@
                 container_width = parseInt(container.width()),
                 container_height = parseInt(container.height()),
                 car_width = parseInt(car.width()),
-                car_height = parseInt(car.height());
+                car_height = parseInt(car.height()),
+                line_width_l = parseInt(line_5.width()),
+                line_width_r = parseInt(line_6.width());
             //some other declarations
             var game_over = false,
                 score_counter = 1,
-                speed = 2,
-                line_speed = 5,
+                speed = 5,
+                line_speed = 2,
                 move_right = false,
                 move_left = false,
                 move_up = false,
@@ -305,25 +365,25 @@
                 }
             });
             function left() {
-                if (game_over === false && parseInt(car.css('left')) > 0) {
+                if (game_over === false && parseInt(car.css('left')) > line_width_l) {
                     car.css('left', parseInt(car.css('left')) - 5);
                     move_left = requestAnimationFrame(left);
                 }
             }
             function right() {
-                if (game_over === false && parseInt(car.css('left')) < container_width - car_width) {
+                if (game_over === false && parseInt(car.css('left')) < container_width - car_width - line_width_r) {
                     car.css('left', parseInt(car.css('left')) + 5);
                     move_right = requestAnimationFrame(right);
                 }
             }
             function up() {
-                if (game_over === false && parseInt(car.css('top')) > 0) {
+                if (game_over === false && parseInt(car.css('top')) > 10) {
                     car.css('top', parseInt(car.css('top')) - 3);
                     move_up = requestAnimationFrame(up);
                 }
             }
             function down() {
-                if (game_over === false && parseInt(car.css('top')) < container_height - car_height) {
+                if (game_over === false && parseInt(car.css('top')) < container_height - car_height - 10) {
                     car.css('top', parseInt(car.css('top')) + 3);
                     move_down = requestAnimationFrame(down);
                 }
@@ -349,6 +409,7 @@
                     line_down(line_1);
                     line_down(line_2);
                     line_down(line_3);
+                    line_down(line_4);                                   
                     anim_id = requestAnimationFrame(repeat);
                 }
             }
@@ -356,7 +417,7 @@
                 var car_current_top = parseInt(car.css('top'));
                 if (car_current_top > container_height) {
                     car_current_top = -200;
-                    var car_left = parseInt(Math.random() * (container_width - car_width));
+                    var car_left = parseInt(Math.random() * (container_width - car_width - line_width_l));
                     car.css('left', car_left);
                 }
                 car.css('top', car_current_top + speed);
@@ -364,7 +425,7 @@
             function line_down(line) {
                 var line_current_top = parseInt(line.css('top'));
                 if (line_current_top > container_height) {
-                    line_current_top = -300;
+                    line_current_top = -200;
                 }
                 line.css('top', line_current_top + line_speed);
             }
