@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Car Racing Game</title>
+    <title>Single Player</title>
     <style type="text/css">
         /*Styling the game*/
         body {
@@ -256,6 +256,32 @@
             padding: 10px;
             box-shadow: 4px 4px 0px 1px #808080;
         }
+
+        .return {
+            position: absolute;
+            padding: 15px 25px;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: red;
+            background-color: rgb(235, 235, 34);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            top: 1%;
+            left: 1%;
+        }
+
+        .return:hover {
+            background-color: #3e8e41
+        }
+
+        .return:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
     </style>
 </head>
 
@@ -331,6 +357,7 @@
             </button>
         </div>
     </div>
+    <button id="return" class="return">↵</button>
     <!--Importing JQuery.js(Minimum version)-->
     <script src="jquery.min.js"></script>
     <script type="text/javascript">
@@ -498,6 +525,11 @@
                 return true;
             }
         });
+    </script>
+    <script type="text/javascript">
+        document.getElementById("return").onclick = function () {
+            location.href = "Main_menu.html";
+        };
     </script>
 </body>
 
