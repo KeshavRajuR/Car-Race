@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Racing Game</title>
+    <style type="text/css">
+        /*Styling the game*/
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-color: rgb(29, 182, 187);
+            font-family: sans-serif;
+        }
+
+        #container_ply_1,
+        #container_ply_2 {
+            position: absolute;
+            height: 100%;
+            width: 25%;
+            background-color: #292929;
+            overflow: hidden;
+        }
+
+        #container_ply_1 {
+            left: 5%;
+        }
+
+        #container_ply_2 {
+            left: 70%;
+        }
+
+        /*Styling the Road Surface Markings*/
+        .line_1_ply_1,
+        .line_2_ply_1,
+        .line_3_ply_1,
+        .line_4_ply_1,
+        .line_1_ply_2,
+        .line_2_ply_2,
+        .line_3_ply_2,
+        .line_4_ply_2 {
+            position: absolute;
+            height: 200px;
+            width: 4%;
+            margin-left: 48%;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .line_1_ply_1,
+        .line_1_ply_2 {
+            top: -150px;
+        }
+
+        .line_2_ply_1,
+        .line_2_ply_2 {
+            top: 145px;
+        }
+
+        .line_3_ply_1,
+        .line_3_ply_2 {
+            top: 440px;
+        }
+
+        .line_4_ply_1,
+        .line_4_ply_2 {
+            top: 735px;
+        }
+
+        .line_5_ply_1,
+        .line_6_ply_1,
+        .line_5_ply_2,
+        .line_6_ply_2 {
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            background: red;
+        }
+
+        .line_6_ply_1,
+        .line_6_ply_2 {
+            margin-left: 98%;
+        }
+
+        /*Styling the cars*/
+        .car_ply_1,
+        .car_ply_2 {
+            position: absolute;
+            height: 60px;
+            width: 40px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 8px 0px black;
+        }
+
+        #car_ply_1,
+        #car_ply_2 {
+            bottom: 8%;
+            left: 60%;
+            background-color: #ffdf5a;
+        }
+
+        .f_glass_ply_1,
+        .b_glass_ply_1,
+        .f_glass_ply_2,
+        .b_glass_ply_2 {
+            position: absolute;
+            height: 20%;
+            width: 60%;
+            margin-left: 20%;
+            background-color: #484848;
+        }
+
+        .f_glass_ply_1,
+        .f_glass_ply_2 {
+            top: 15%;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .b_glass_ply_1,
+        .b_glass_ply_2 {
+            bottom: 15%;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .f_light_l_ply_1,
+        .f_light_r_ply_1,
+        .b_light_l_ply_1,
+        .b_light_r_ply_1,
+        .rev_f_light_l_ply_1,
+        .rev_f_light_r_ply_1,
+        .rev_b_light_l_ply_1,
+        .rev_b_light_r_ply_1,
+        .f_light_l_ply_2,
+        .f_light_r_ply_2,
+        .b_light_l_ply_2,
+        .b_light_r_ply_2,
+        .rev_f_light_l_ply_2,
+        .rev_f_light_r_ply_2,
+        .rev_b_light_l_ply_2,
+        .rev_b_light_r_ply_2 {
+            position: absolute;
+            height: 10%;
+            width: 20%;
+        }
+
+        .f_light_l_ply_1,
+        .f_light_l_ply_2 {
+            top: -6%;
+            margin-left: 10%;
+            background-color: #efefef;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .f_light_r_ply_1,
+        .f_light_r_ply_2 {
+            top: -6%;
+            margin-left: 70%;
+            background-color: #efefef;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .b_light_l_ply_1,
+        .b_light_l_ply_2 {
+            top: 96%;
+            margin-left: 10%;
+            background-color: red;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .b_light_r_ply_1,
+        .b_light_r_ply_2 {
+            top: 96%;
+            margin-left: 70%;
+            background-color: red;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .rev_f_light_l_ply_1,
+        .rev_f_light_l_ply_2 {
+            top: 96%;
+            margin-left: 10%;
+            background-color: #efefef;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .rev_f_light_r_ply_1,
+        .rev_f_light_r_ply_2 {
+            top: 96%;
+            margin-left: 70%;
+            background-color: #efefef;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .rev_b_light_l_ply_1,
+        .rev_b_light_l_ply_2 {
+            top: -6%;
+            margin-left: 10%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .rev_b_light_r_ply_1,
+        .rev_b_light_r_ply_2 {
+            top: -6%;
+            margin-left: 70%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .f_tyre_l_ply_1,
+        .f_tyre_r_ply_1,
+        .b_tyre_l_ply_1,
+        .b_tyre_r_ply_1,
+        .f_tyre_l_ply_2,
+        .f_tyre_r_ply_2,
+        .b_tyre_l_ply_2,
+        .b_tyre_r_ply_2 {
+            position: absolute;
+            height: 20%;
+            width: 10%;
+            background-color: grey;
+        }
+
+        .f_tyre_l_ply_1,
+        .f_tyre_l_ply_2 {
+            top: 20%;
+            left: -10%;
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        .f_tyre_r_ply_1,
+        .f_tyre_r_ply_2 {
+            top: 20%;
+            left: 100%;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .b_tyre_l_ply_1,
+        .b_tyre_l_ply_2 {
+            top: 70%;
+            left: -10%;
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        .b_tyre_r_ply_1,
+        .b_tyre_r_ply_2 {
+            top: 70%;
+            left: 100%;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        #car_1_ply_1,
+        #car_1_ply_2 {
+            top: -100px;
+            left: 60%;
+            background-color: red;
+        }
+
+        #car_2_ply_1,
+        #car_2_ply_2 {
+            top: -200px;
+            left: 40%;
+            background-color: blue;
+        }
+
+        #car_3_ply_1,
+        #car_3_ply_2 {
+            top: -350px;
+            left: 50%;
+            background-color: green;
+        }
+
+        /*Styling the Restart feature*/
+        #restart_div_ply_1,
+        #restart_div_ply_2 {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: #292929;
+            color: white;
+            font-family: sans-serif;
+            font-size: 40px;
+            text-align: center;
+            display: none;
+        }
+
+        /*Text on the restart button*/
+        #restart_ply_1,
+        #restart_ply_2 {
+            border: none;
+            padding: 25px;
+            color: white;
+            background-color: #8a64ff;
+            font-size: 30px;
+            margin-top: 30%;
+        }
+
+        .small_text {
+            font-size: 15px;
+        }
+
+        /*Styling the score board*/
+        #score_div_ply_1,
+        #score_div_ply_2 {
+            position: absolute;
+            font-size: 35px;
+            margin-top: 20%;
+            background-color: white;
+            color: #454545;
+            padding: 10px;
+            box-shadow: 4px 4px 0px 1px #808080;
+        }
+
+        #score_div_ply_1 {
+            margin-left: 35%;
+        }
+
+        #score_div_ply_2 {
+            margin-left: 55%;
+        }
+
+        #divider {
+            position: absolute;
+            margin-left: 50%;
+            height: 100%;
+            width: 1%;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <!--Player-1-->
+    <!--Score board-->
+    <div id="score_div_ply_1">
+        Score: <span id="score_ply_1">0</span>
+    </div>
+    <div id="divider"></div>
+    <!--One div for the rest of the elements of the game since they all will come under one area-->
+    <div id="container_ply_1">
+        <!--div for the Road Surface marking-->
+        <div class="line_1_ply_1"></div>
+        <div class="line_2_ply_1"></div>
+        <div class="line_3_ply_1"></div>
+        <div class="line_4_ply_1"></div>
+        <div class="line_5_ply_1"></div>
+        <div class="line_6_ply_1"></div>
+        <!--div for the car user will control-->
+        <div id="car_ply_1" class="car_ply_1">
+            <div class="f_glass_ply_1"></div>
+            <div class="b_glass_ply_1"></div>
+            <div class="f_light_l_ply_1"></div>
+            <div class="f_light_r_ply_1"></div>
+            <div class="b_light_l_ply_1"></div>
+            <div class="b_light_r_ply_1"></div>
+            <div class="f_tyre_l_ply_1"></div>
+            <div class="f_tyre_r_ply_1"></div>
+            <div class="b_tyre_l_ply_1"></div>
+            <div class="b_tyre_r_ply_1"></div>
+        </div>
+        <!-- id with car_1, car_2 and car_3 is for the obstacle cars-->
+        <div id="car_1_ply_1" class="car_ply_1">
+            <div class="f_glass_ply_1"></div>
+            <div class="b_glass_ply_1"></div>
+            <div class="rev_f_light_l_ply_1"></div>
+            <div class="rev_f_light_r_ply_1"></div>
+            <div class="rev_b_light_l_ply_1"></div>
+            <div class="rev_b_light_r_ply_1"></div>
+            <div class="f_tyre_l_ply_1"></div>
+            <div class="f_tyre_r_ply_1"></div>
+            <div class="b_tyre_l_ply_1"></div>
+            <div class="b_tyre_r_ply_1"></div>
+        </div>
+        <div id="car_2_ply_1" class="car_ply_1">
+            <div class="f_glass_ply_1"></div>
+            <div class="b_glass_ply_1"></div>
+            <div class="rev_f_light_l_ply_1"></div>
+            <div class="rev_f_light_r_ply_1"></div>
+            <div class="rev_b_light_l_ply_1"></div>
+            <div class="rev_b_light_r_ply_1"></div>
+            <div class="f_tyre_l_ply_1"></div>
+            <div class="f_tyre_r_ply_1"></div>
+            <div class="b_tyre_l_ply_1"></div>
+            <div class="b_tyre_r_ply_1"></div>
+        </div>
+        <div id="car_3_ply_1" class="car_ply_1">
+            <div class="f_glass_ply_1"></div>
+            <div class="b_glass_ply_1"></div>
+            <div class="rev_f_light_l_ply_1"></div>
+            <div class="rev_f_light_r_ply_1"></div>
+            <div class="rev_b_light_l_ply_1"></div>
+            <div class="rev_b_light_r_ply_1"></div>
+            <div class="f_tyre_l_ply_1"></div>
+            <div class="f_tyre_r_ply_1"></div>
+            <div class="b_tyre_l_ply_1"></div>
+            <div class="b_tyre_r_ply_1"></div>
+        </div>
+        <!--div for the restart feature-->
+        <div id="restart_div_ply_1">
+            <button id="restart_ply_1">
+                <p>Restart</p>
+                <small class="small_text">(press Enter)</small>
+            </button>
+        </div>
+    </div>
+    <!--Player-2-->
+    <!--Score board-->
+    <div id="score_div_ply_2">
+        Score: <span id="score_ply_2">0</span>
+    </div>
+    <div id="divider"></div>
+    <!--One div for the rest of the elements of the game since they all will come under one area-->
+    <div id="container_ply_2">
+        <!--div for the Road Surface marking-->
+        <div class="line_1_ply_2"></div>
+        <div class="line_2_ply_2"></div>
+        <div class="line_3_ply_2"></div>
+        <div class="line_4_ply_2"></div>
+        <div class="line_5_ply_2"></div>
+        <div class="line_6_ply_2"></div>
+        <!--div for the car user will control-->
+        <div id="car_ply_2" class="car_ply_2">
+            <div class="f_glass_ply_2"></div>
+            <div class="b_glass_ply_2"></div>
+            <div class="f_light_l_ply_2"></div>
+            <div class="f_light_r_ply_2"></div>
+            <div class="b_light_l_ply_2"></div>
+            <div class="b_light_r_ply_2"></div>
+            <div class="f_tyre_l_ply_2"></div>
+            <div class="f_tyre_r_ply_2"></div>
+            <div class="b_tyre_l_ply_2"></div>
+            <div class="b_tyre_r_ply_2"></div>
+        </div>
+        <!-- id with car_1, car_2 and car_3 is for the obstacle cars-->
+        <div id="car_1_ply_2" class="car_ply_2">
+            <div class="f_glass_ply_2"></div>
+            <div class="b_glass_ply_2"></div>
+            <div class="rev_f_light_l_ply_2"></div>
+            <div class="rev_f_light_r_ply_2"></div>
+            <div class="rev_b_light_l_ply_2"></div>
+            <div class="rev_b_light_r_ply_2"></div>
+            <div class="f_tyre_l_ply_2"></div>
+            <div class="f_tyre_r_ply_2"></div>
+            <div class="b_tyre_l_ply_2"></div>
+            <div class="b_tyre_r_ply_2"></div>
+        </div>
+        <div id="car_2_ply_2" class="car_ply_2">
+            <div class="f_glass_ply_2"></div>
+            <div class="b_glass_ply_2"></div>
+            <div class="rev_f_light_l_ply_2"></div>
+            <div class="rev_f_light_r_ply_2"></div>
+            <div class="rev_b_light_l_ply_2"></div>
+            <div class="rev_b_light_r_ply_2"></div>
+            <div class="f_tyre_l_ply_2"></div>
+            <div class="f_tyre_r_ply_2"></div>
+            <div class="b_tyre_l_ply_2"></div>
+            <div class="b_tyre_r_ply_2"></div>
+        </div>
+        <div id="car_3_ply_2" class="car_ply_2">
+            <div class="f_glass_ply_2"></div>
+            <div class="b_glass_ply_2"></div>
+            <div class="rev_f_light_l_ply_2"></div>
+            <div class="rev_f_light_r_ply_2"></div>
+            <div class="rev_b_light_l_ply_2"></div>
+            <div class="rev_b_light_r_ply_2"></div>
+            <div class="f_tyre_l_ply_2"></div>
+            <div class="f_tyre_r_ply_2"></div>
+            <div class="b_tyre_l_ply_2"></div>
+            <div class="b_tyre_r_ply_2"></div>
+        </div>
+        <!--div for the restart feature-->
+        <div id="restart_div_ply_2">
+            <button id="restart_ply_2">
+                <p>Restart</p>
+                <small class="small_text">(press Enter)</small>
+            </button>
+        </div>
+    </div>
+    <!--Importing JQuery.js(Minimum version)-->
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var anim_id;
+            //saving dom objects to variables
+            var container = $('#container_ply_1'),
+                car = $('#car_ply_1'),
+                car_1 = $('#car_1_ply_1'),
+                car_2 = $('#car_2_ply_1'),
+                car_3 = $('#car_3_ply_1'),
+                line_1 = $('.line_1_ply_1'),
+                line_2 = $('.line_2_ply_1'),
+                line_3 = $('.line_3_ply_1'),
+                line_4 = $('.line_4_ply_1'),
+                line_5 = $('.line_5_ply_1'),
+                line_6 = $('.line_6_ply_1'),
+                restart_div = $('#restart_div_ply_1'),
+                restart_btn = $('#restart_ply_1'),
+                score = $('#score_ply_1');
+            //saving some initial setup
+            var container_left = parseInt(container.css('left')),
+                container_width = parseInt(container.width()),
+                container_height = parseInt(container.height()),
+                car_width = parseInt(car.width()),
+                car_height = parseInt(car.height()),
+                line_width_l = parseInt(line_5.width()),
+                line_width_r = parseInt(line_6.width());
+            //some other declarations
+            var game_over = false,
+                score_counter = 1,
+                speed = 5,
+                line_speed = 2,
+                move_right = false,
+                move_left = false,
+                move_up = false,
+                move_down = false;
+            /* ------------------------------GAME CODE STARTS HERE------------------------------------------- */
+            /* Move the cars */
+            $(document).on('keydown', function (e) {
+                if (game_over === false) {
+                    var key = e.keyCode;
+                    if (key === 65 && move_left === false) {
+                        move_left = requestAnimationFrame(left);
+                    } else if (key === 68 && move_right === false) {
+                        move_right = requestAnimationFrame(right);
+                    } else if (key === 87 && move_up === false) {
+                        move_up = requestAnimationFrame(up);
+                    } else if (key === 83 && move_down === false) {
+                        move_down = requestAnimationFrame(down);
+                    }
+                }
+            });
+            $(document).on('keyup', function (e) {
+                if (game_over === false) {
+                    var key = e.keyCode;
+                    if (key === 65) {
+                        cancelAnimationFrame(move_left);
+                        move_left = false;
+                    } else if (key === 68) {
+                        cancelAnimationFrame(move_right);
+                        move_right = false;
+                    } else if (key === 87) {
+                        cancelAnimationFrame(move_up);
+                        move_up = false;
+                    } else if (key === 83) {
+                        cancelAnimationFrame(move_down);
+                        move_down = false;
+                    }
+                }
+            });
+            function left() {
+                if (game_over === false && parseInt(car.css('left')) > line_width_l) {
+                    car.css('left', parseInt(car.css('left')) - 5);
+                    move_left = requestAnimationFrame(left);
+                }
+            }
+            function right() {
+                if (game_over === false && parseInt(car.css('left')) < container_width - car_width - line_width_r) {
+                    car.css('left', parseInt(car.css('left')) + 5);
+                    move_right = requestAnimationFrame(right);
+                }
+            }
+            function up() {
+                if (game_over === false && parseInt(car.css('top')) > 10) {
+                    car.css('top', parseInt(car.css('top')) - 3);
+                    move_up = requestAnimationFrame(up);
+                }
+            }
+            function down() {
+                if (game_over === false && parseInt(car.css('top')) < container_height - car_height - 10) {
+                    car.css('top', parseInt(car.css('top')) + 3);
+                    move_down = requestAnimationFrame(down);
+                }
+            }
+            /* Move the cars and lines */
+            anim_id = requestAnimationFrame(repeat);
+            function repeat() {
+                if (game_over === false) {
+                    if (collision(car, car_1) || collision(car, car_2) || collision(car, car_3)) {
+                        stop_the_game();
+                    }
+                    score_counter++;
+                    if (score_counter % 20 == 0) {
+                        score.text(parseInt(score.text()) + 1);
+                    }
+                    if (score_counter % 500 == 0) {
+                        speed++;
+                        line_speed++;
+                    }
+                    car_down(car_1);
+                    car_down(car_2);
+                    car_down(car_3);
+                    line_down(line_1);
+                    line_down(line_2);
+                    line_down(line_3);
+                    line_down(line_4);
+                    anim_id = requestAnimationFrame(repeat);
+                }
+            }
+            function car_down(car) {
+                var car_current_top = parseInt(car.css('top'));
+                if (car_current_top > container_height) {
+                    car_current_top = -200;
+                    var car_left = parseInt(Math.random() * (container_width - car_width - line_width_l));
+                    car.css('left', car_left);
+                }
+                car.css('top', car_current_top + speed);
+            }
+            function line_down(line) {
+                var line_current_top = parseInt(line.css('top'));
+                if (line_current_top > container_height) {
+                    line_current_top = -200;
+                }
+                line.css('top', line_current_top + line_speed);
+            }
+            restart_btn.click(function () {
+                location.reload();
+            });
+            function stop_the_game() {
+                game_over = true;
+                cancelAnimationFrame(anim_id);
+                cancelAnimationFrame(move_right);
+                cancelAnimationFrame(move_left);
+                cancelAnimationFrame(move_up);
+                cancelAnimationFrame(move_down);
+                restart_div.slideDown();
+                restart_btn.focus();
+            }
+            /* ------------------------------GAME CODE ENDS HERE------------------------------------------- */
+            function collision($div1, $div2) {
+                var x1 = $div1.offset().left,
+                    y1 = $div1.offset().top,
+                    h1 = $div1.outerHeight(true),
+                    w1 = $div1.outerWidth(true),
+                    b1 = y1 + h1,
+                    r1 = x1 + w1,
+                    x2 = $div2.offset().left,
+                    y2 = $div2.offset().top,
+                    h2 = $div2.outerHeight(true),
+                    w2 = $div2.outerWidth(true),
+                    b2 = y2 + h2,
+                    r2 = x2 + w2;
+                if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+                return true;
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var anim_id;
+            //saving dom objects to variables
+            var container = $('#container_ply_2'),
+                car = $('#car_ply_2'),
+                car_1 = $('#car_1_ply_2'),
+                car_2 = $('#car_2_ply_2'),
+                car_3 = $('#car_3_ply_2'),
+                line_1 = $('.line_1_ply_2'),
+                line_2 = $('.line_2_ply_2'),
+                line_3 = $('.line_3_ply_2'),
+                line_4 = $('.line_4_ply_2'),
+                line_5 = $('.line_5_ply_2'),
+                line_6 = $('.line_6_ply_2'),
+                restart_div = $('#restart_div_ply_2'),
+                restart_btn = $('#restart_ply_2'),
+                score = $('#score_ply_2');
+            //saving some initial setup
+            var container_left = parseInt(container.css('left')),
+                container_width = parseInt(container.width()),
+                container_height = parseInt(container.height()),
+                car_width = parseInt(car.width()),
+                car_height = parseInt(car.height()),
+                line_width_l = parseInt(line_5.width()),
+                line_width_r = parseInt(line_6.width());
+            //some other declarations
+            var game_over = false,
+                score_counter = 1,
+                speed = 5,
+                line_speed = 2,
+                move_right = false,
+                move_left = false,
+                move_up = false,
+                move_down = false;
+            /* ------------------------------GAME CODE STARTS HERE------------------------------------------- */
+            /* Move the cars */
+            $(document).on('keydown', function (e) {
+                if (game_over === false) {
+                    var key = e.keyCode;
+                    if (key === 37 && move_left === false) {
+                        move_left = requestAnimationFrame(left);
+                    } else if (key === 39 && move_right === false) {
+                        move_right = requestAnimationFrame(right);
+                    } else if (key === 38 && move_up === false) {
+                        move_up = requestAnimationFrame(up);
+                    } else if (key === 40 && move_down === false) {
+                        move_down = requestAnimationFrame(down);
+                    }
+                }
+            });
+            $(document).on('keyup', function (e) {
+                if (game_over === false) {
+                    var key = e.keyCode;
+                    if (key === 37) {
+                        cancelAnimationFrame(move_left);
+                        move_left = false;
+                    } else if (key === 39) {
+                        cancelAnimationFrame(move_right);
+                        move_right = false;
+                    } else if (key === 38) {
+                        cancelAnimationFrame(move_up);
+                        move_up = false;
+                    } else if (key === 40) {
+                        cancelAnimationFrame(move_down);
+                        move_down = false;
+                    }
+                }
+            });
+            function left() {
+                if (game_over === false && parseInt(car.css('left')) > line_width_l) {
+                    car.css('left', parseInt(car.css('left')) - 5);
+                    move_left = requestAnimationFrame(left);
+                }
+            }
+            function right() {
+                if (game_over === false && parseInt(car.css('left')) < container_width - car_width - line_width_r) {
+                    car.css('left', parseInt(car.css('left')) + 5);
+                    move_right = requestAnimationFrame(right);
+                }
+            }
+            function up() {
+                if (game_over === false && parseInt(car.css('top')) > 10) {
+                    car.css('top', parseInt(car.css('top')) - 3);
+                    move_up = requestAnimationFrame(up);
+                }
+            }
+            function down() {
+                if (game_over === false && parseInt(car.css('top')) < container_height - car_height - 10) {
+                    car.css('top', parseInt(car.css('top')) + 3);
+                    move_down = requestAnimationFrame(down);
+                }
+            }
+            /* Move the cars and lines */
+            anim_id = requestAnimationFrame(repeat);
+            function repeat() {
+                if (game_over === false) {
+                    if (collision(car, car_1) || collision(car, car_2) || collision(car, car_3)) {
+                        stop_the_game();
+                    }
+                    score_counter++;
+                    if (score_counter % 20 == 0) {
+                        score.text(parseInt(score.text()) + 1);
+                    }
+                    if (score_counter % 500 == 0) {
+                        speed++;
+                        line_speed++;
+                    }
+                    car_down(car_1);
+                    car_down(car_2);
+                    car_down(car_3);
+                    line_down(line_1);
+                    line_down(line_2);
+                    line_down(line_3);
+                    line_down(line_4);
+                    anim_id = requestAnimationFrame(repeat);
+                }
+            }
+            function car_down(car) {
+                var car_current_top = parseInt(car.css('top'));
+                if (car_current_top > container_height) {
+                    car_current_top = -200;
+                    var car_left = parseInt(Math.random() * (container_width - car_width - line_width_l));
+                    car.css('left', car_left);
+                }
+                car.css('top', car_current_top + speed);
+            }
+            function line_down(line) {
+                var line_current_top = parseInt(line.css('top'));
+                if (line_current_top > container_height) {
+                    line_current_top = -200;
+                }
+                line.css('top', line_current_top + line_speed);
+            }
+            restart_btn.click(function () {
+                location.reload();
+            });
+            function stop_the_game() {
+                game_over = true;
+                cancelAnimationFrame(anim_id);
+                cancelAnimationFrame(move_right);
+                cancelAnimationFrame(move_left);
+                cancelAnimationFrame(move_up);
+                cancelAnimationFrame(move_down);
+                restart_div.slideDown();
+                restart_btn.focus();
+            }
+            /* ------------------------------GAME CODE ENDS HERE------------------------------------------- */
+            function collision($div1, $div2) {
+                var x1 = $div1.offset().left,
+                    y1 = $div1.offset().top,
+                    h1 = $div1.outerHeight(true),
+                    w1 = $div1.outerWidth(true),
+                    b1 = y1 + h1,
+                    r1 = x1 + w1,
+                    x2 = $div2.offset().left,
+                    y2 = $div2.offset().top,
+                    h2 = $div2.outerHeight(true),
+                    w2 = $div2.outerWidth(true),
+                    b2 = y2 + h2,
+                    r2 = x2 + w2;
+                if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+                return true;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
