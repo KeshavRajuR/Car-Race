@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>Car Racing Game</title>
     <style>
         #container {
             position: relative;
@@ -10,42 +11,55 @@
             top: 0%;
         }
 
-        #single_player,
-        #multi_player,
-        #tutorial,
-        #about {
+        .button_1,
+        .button_2,
+        .button_3,
+        .button_4 {
             position: absolute;
-            left: 75%;
-            background-color: rgb(235, 235, 34);
-            color: red;
-            padding: 14px 25px;
-            font-family: 'Courier New', Courier, monospace;
+            padding: 15px 25px;
+            font-size: 24px;
             text-align: center;
-            text-decoration: none;
-            min-width: 160px;
-            border-radius: 5px 5px 5px 5px;
+            cursor: pointer;
+            outline: none;
+            color: red;
+            background-color: rgb(235, 235, 34);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            left: 75%;
+            min-width: 300px;
         }
 
-        #single_player {
+        .button_1 {
             top: 250px;
         }
 
-        #multi_player {
+        .button_2 {
             top: 350px;
         }
 
-        #tutorial {
+        .button_3 {
             top: 450px;
         }
 
-        #about {
+        .button_4 {
             top: 550px;
         }
 
-        a:hover,
-        a:active {
-            background-color: red;
-            font-size: 20px;
+        .button_1:hover,
+        .button_2:hover,
+        .button_3:hover,
+        .button_4:hover {
+            background-color: #3e8e41
+        }
+
+        .button_1:active,
+        .button_2:active,
+        .button_3:active,
+        .button_4:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
         }
 
         body,
@@ -81,12 +95,26 @@
 <body>
     <div class="pic" id="container">
         <p>ℂ𝔸ℝ ℝ𝔸ℂ𝔼</p>
-        <a href="Single_player.html" target="_self" id="single_player">SINGLE-PLAYER</a>
-        <a href="multi_player.html" target="_self" id="multi_player">MULTIPLAYER</a>
-        <a href="tutorial.html" target="_self" id="tutorial">TUTORIAL</a>
-        <a href="about.html" target="_self" id="about">ABOUT</a>
+        <button id="single_player" class="button_1">SINGLE PLAYER</button>
+        <button id="dual_player" class="button_2">DUAL PLAYER</button>
+        <button id="tutorial" class="button_3">TUTORIAL</button>
+        <button id="about" class="button_4">ABOUT</button>
     </div>
 
+    <script type="text/javascript">
+        document.getElementById("single_player").onclick = function () {
+            location.href = "Single_player.html";
+        };
+        document.getElementById("dual_player").onclick = function () {
+            location.href = "multi_player.html";
+        };
+        document.getElementById("tutorial").onclick = function () {
+            location.href = "tutorial.html";
+        };
+        document.getElementById("about").onclick = function () {
+            location.href = "about.html";
+        };
+    </script>
 </body>
 
 </html>
