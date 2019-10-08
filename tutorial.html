@@ -1,5 +1,455 @@
-<p>Page is still in development</p>
-<p>UP arrow to go up</p>
-<p>DOWN arrow to go DOWN</p>
-<p>LEFT arrow to go LEFT</p>
-<p>RIGHT arrow to go RIGHT</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial</title>
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-color: rgb(29, 182, 187);
+            font-family: sans-serif;
+        }
+
+        #up,
+        #down,
+        #left,
+        #right {
+            position: absolute;
+            height: 20%;
+            width: 160px;
+            top: 30%;
+            background-color: #292929;
+            overflow: hidden;
+        }
+
+        #up {
+            left: 20%;
+        }
+
+        #down {
+            left: 40%;
+        }
+
+        #left {
+            left: 65%;
+        }
+
+        #right {
+            left: 85%;
+        }
+
+        .car {
+            position: absolute;
+            height: 60px;
+            width: 40px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 8px 0px black;
+            top: 30%;
+            left: 35%;
+            background-color: #ffdf5a;
+            display: block;
+
+        }
+
+        #car_1 {
+            animation: up 4s ease infinite;
+        }
+
+        @keyframes up {
+            0% {
+                top: 100%;
+            }
+
+            100% {
+                top: -40%;
+            }
+        }
+
+        #car_2 {
+            animation: down 4s ease infinite;
+        }
+
+        @keyframes down {
+            0% {
+                top: -40%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        #car_3 {
+            animation: left_ 4s ease infinite;
+        }
+
+        @keyframes left_ {
+            0% {
+                left: 100%;
+            }
+
+            100% {
+                left: -40%;
+            }
+        }
+
+        #car_4 {
+            animation: right_ 4s ease infinite;
+        }
+
+        @keyframes right_ {
+            0% {
+                left: -40%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .f_glass,
+        .b_glass {
+            position: absolute;
+            height: 20%;
+            width: 60%;
+            margin-left: 20%;
+            background-color: #484848;
+        }
+
+        .f_glass {
+            top: 15%;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .b_glass {
+            bottom: 15%;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .f_light_l,
+        .f_light_r,
+        .b_light_l,
+        .b_light_r,
+        .rev_f_light_l,
+        .rev_f_light_r,
+        .rev_b_light_l,
+        .rev_b_light_r {
+            position: absolute;
+            height: 10%;
+            width: 20%;
+        }
+
+        .f_light_l {
+            top: -6%;
+            margin-left: 10%;
+            background-color: #efefef;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .f_light_r {
+            top: -6%;
+            margin-left: 70%;
+            background-color: #efefef;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .b_light_l {
+            top: 96%;
+            margin-left: 10%;
+            background-color: red;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .b_light_r {
+            top: 96%;
+            margin-left: 70%;
+            background-color: red;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .rev_f_light_l {
+            top: 96%;
+            margin-left: 10%;
+            background-color: #efefef;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .rev_f_light_r {
+            top: 96%;
+            margin-left: 70%;
+            background-color: #efefef;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .rev_b_light_l {
+            top: -6%;
+            margin-left: 10%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .rev_b_light_r {
+            top: -6%;
+            margin-left: 70%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .f_tyre_l,
+        .f_tyre_r,
+        .b_tyre_l,
+        .b_tyre_r {
+            position: absolute;
+            height: 20%;
+            width: 10%;
+            background-color: grey;
+        }
+
+        .f_tyre_l {
+            top: 20%;
+            left: -10%;
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        .f_tyre_r {
+            top: 20%;
+            left: 100%;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .b_tyre_l {
+            top: 70%;
+            left: -10%;
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        .b_tyre_r {
+            top: 70%;
+            left: 100%;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        #heading {
+            position: absolute;
+            top: -140px;
+            left: 30%;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 140px;
+        }
+
+        #sp,
+        #mp_1,
+        #mp_2 {
+            position: absolute;
+            left: 0%;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 28px;
+        }
+
+        #sp {
+            top: 53%;
+            left: 7%;
+        }
+
+        #mp_1 {
+            top: 68%;
+        }
+
+        #mp_2 {
+            top: 78%;
+        }
+
+        .button_1,
+        .button_2,
+        .button_3,
+        .button_4,
+        .return {
+            position: absolute;
+            padding: 15px 25px;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: blue;
+            background-color: black;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+
+        }
+
+        .button_1 {
+            min-width: 160px;
+            left: 20%;
+        }
+
+        .button_2 {
+            min-width: 160px;
+            left: 40%;
+        }
+
+        .button_3 {
+            min-width: 160px;
+            left: 65%;
+        }
+
+        .button_4 {
+            min-width: 160px;
+            left: 85%;
+        }
+
+        .return {
+            background-color: rgb(235, 235, 34);
+            color: red;
+            top: 1%;
+            left: 1%;
+        }
+
+        .button_1:hover,
+        .button_2:hover,
+        .button_3:hover,
+        .button_4:hover,
+        .return:hover {
+            background-color: #3e8e41
+        }
+
+        .return:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+        #button_a {
+            top: 55%;
+        }
+
+        #button_b {
+            top: 70%;
+        }
+
+        #button_c {
+            top: 80%;
+        }
+
+        #UP,
+        #DOWN,
+        #LEFT,
+        #RIGHT {
+            position: absolute;
+            top: 20%;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 30px;
+        }
+
+        #UP {
+            left: 20%;
+        }
+
+        #DOWN {
+            left: 40%;
+        }
+
+        #LEFT {
+            left: 65%;
+        }
+
+        #RIGHT {
+            left: 85%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="up">
+            <div id="car_1" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="b_light_l"></div>
+                <div class="b_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+        </div>
+        <div id="down">
+            <div id="car_2" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="b_light_l"></div>
+                <div class="b_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+        </div>
+        <div id="left">
+            <div id="car_3" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="b_light_l"></div>
+                <div class="b_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+        </div>
+        <div id="right">
+            <div id="car_4" class="car">
+                <div class="f_glass"></div>
+                <div class="b_glass"></div>
+                <div class="f_light_l"></div>
+                <div class="f_light_r"></div>
+                <div class="b_light_l"></div>
+                <div class="b_light_r"></div>
+                <div class="f_tyre_l"></div>
+                <div class="f_tyre_r"></div>
+                <div class="b_tyre_l"></div>
+                <div class="b_tyre_r"></div>
+            </div>
+        </div>
+        <p id="heading">TUTORIALS</p>
+        <p id="UP">MOVE UP</p>
+        <p id="DOWN">MOVE DOWN</p>
+        <p id="LEFT">MOVE LEFT</p>
+        <p id="RIGHT">MOVE RIGHT</p>
+        <p id="sp">SINGLE PLAYER:</p>
+        <p id="mp_1">DUAL PLAYER[PLAYER 1]:</p>
+        <p id="mp_2">DUAL PLAYER[PLAYER 2]:</p>
+        <button id="button_a" class="button_1">⇧</button>
+        <button id="button_b" class="button_1">W</button>
+        <button id="button_c" class="button_1">⇧</button>
+        <button id="button_a" class="button_2">⇩</button>
+        <button id="button_b" class="button_2">S</button>
+        <button id="button_c" class="button_2">⇩</button>
+        <button id="button_a" class="button_3">⇦</button>
+        <button id="button_b" class="button_3">A</button>
+        <button id="button_c" class="button_3">⇦</button>
+        <button id="button_a" class="button_4">⇨</button>
+        <button id="button_b" class="button_4">D</button>
+        <button id="button_c" class="button_4">⇨</button>
+        <button id="return" class="return">↵</button>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("return").onclick = function () {
+            location.href = "Main_menu.html";
+        };
+    </script>
+</body>
+
+</html>
