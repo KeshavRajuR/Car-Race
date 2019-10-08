@@ -1,6 +1,24 @@
 # Car-Race
 
-This is the final project for our Web Technologies-1 course. It is a car game that will be made using HTML, CSS and JavaScript. The game is in development stages and some features may or may not work. Some features will be added soon enough.
+This is the final project for the Web Technologies-1 course. It is a car racing game that is made using HTML, CSS, JavaScript and jQuery. The game is in development stages and some features may or may not work. Some features will be added soon enough.
+
+Usage - Download or clone the repository and navigate to the folder. In here there will be a file called Main_menu.html which is the main file for the game. It contains the front page of the game. Open this file in your browser, preferably Chrome or Firefox and you can go ahead with playing the game.
+
+Features:
+1) For single-player, movement is with the arrow keys.
+2) For multiplayer, movement is with WASD or arrow keys depending on which side of the screen you are playing.
+
+Upcoming features:
+1) Special abilities for the car.
+2) Condition specific abilities for the car.
+
+Issues to be addressed:
+1) The game needs to adapt to the size of the brower as it changes.
+2) Sometimes the movement keys and other keys don't funtion when the game is opened the first time.
+
+Temporary fixes to these issues:
+1) Aspect ratio issue: You can resize the browser to your liking and reload the page. It will fix the issue but the cars and road might be out of proportion or have some other bug. It is recommended to play the game in full-screen for best user experience.
+2) Movement keys issue: Reloading or restarting the game will fix this issue.
 
 Project members:
 1) Keshav R Raju(GitHub: https://github.com/keshavrajur)
